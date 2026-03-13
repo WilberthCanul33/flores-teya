@@ -28,8 +28,9 @@ E-commerce para la venta de verduras orgánicas con entrega a domicilio en Méri
 
 ## 1️⃣ Clonar el repositorio
 
-git clone https://github.com/tu-usuario/flores-teya.git
+git clone https://github.com/WilberthCanul33/flores-teya.git
 cd flores-teya
+
 
 ---
 

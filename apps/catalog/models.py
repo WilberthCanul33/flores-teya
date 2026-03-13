@@ -21,10 +21,10 @@ class Category(models.Model):
 
 class Product(models.Model):
     PRESENTATION_CHOICES = [
-        ('PZA', _('Piece')),
-        ('KG', _('Kilogram')),
-        ('BCH', _('Bag')),
-        ('MZO', _('Bunch')),
+        ('PZA', 'Pieza'),
+        ('KG', 'Kilogramo'),
+        ('BCH', 'Bolsa'),
+        ('MZO', 'Manojo'),
     ]
     
     name = models.CharField(max_length=200, verbose_name=_('name'))

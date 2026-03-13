@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block extra_css %}
-  <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+  <link rel="stylesheet" href="{% static 'css/checkout.css' %}" />
 {% endblock %}
 
 {% block content %}
@@ -69,6 +69,13 @@
                   <div class="pickup-schedule">
                     <i class="fas fa-clock"></i>
                     Lunes a sábado de 7:00 AM a 5:00 PM
+                  </div>
+                  <div class="pickup-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.661111111111!2d-99.133333!3d19.433333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDI2JzAwLjAiTiA5OcKwMDgnMDAuMCJX!5e0!3m2!1ses!2smx!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+                    <a href="https://maps.google.com/?q=Segundo+Lugar" target="_blank" class="map-link">
+                      <i class="fas fa-external-link-alt"></i>
+                      Ver en Google Maps
+                    </a>
                   </div>
                   <!-- Selector de fecha para el punto 2 -->
                   <div class="pickup-date-selector" id="pickupDateSelector" style="display: none;">

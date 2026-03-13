@@ -1,0 +1,646 @@
+/* ===== Variables ===== */
+:root {
+  --primary-color: #2e7d32;
+  --primary-dark: #1b5e20;
+  --primary-light: #4caf50;
+  --text-dark: #333;
+  --text-light: #666;
+  --text-lighter: #999;
+  --bg-light: #f8f9fa;
+  --border-color: #e0e0e0;
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --error-color: #dc3545;
+  --error-bg: #fff8f8;
+  --paypal-blue: #0070ba;
+  --paypal-dark: #003087;
+  --info-blue: #0284c7;
+  --info-bg: #e8f4fd;
+}
+
+/* ===== Animaciones ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Contenedor principal ===== */
+.checkout-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.checkout-title {
+  font-size: 2rem;
+  color: var(--text-dark);
+  margin-bottom: 2rem;
+}
+
+/* ===== Grid principal ===== */
+.checkout-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+/* ===== Formulario ===== */
+.checkout-form-container {
+  background: white;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.section-title {
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.section-title i {
+  color: var(--primary-color);
+}
+
+/* ===== Opciones de entrega ===== */
+.delivery-section {
+  margin-bottom: 2rem;
+}
+
+.delivery-option {
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.delivery-option:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 5px 15px rgba(46, 125, 50, 0.2);
+  transform: translateY(-2px);
+}
+
+.delivery-option.selected {
+  border-color: var(--primary-color);
+  background: #e8f5e9;
+  border-width: 3px;
+}
+
+.delivery-option input[type='radio'] {
+  display: none;
+}
+
+.delivery-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.delivery-header i {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+.delivery-header h3 {
+  font-size: 1.2rem;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+.delivery-price {
+  margin-left: auto;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+/* ===== Puntos de recogida ===== */
+.pickup-points {
+  margin-top: 1rem;
+  padding-left: 2.5rem;
+}
+
+.pickup-card {
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  padding: 1.2rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  background: white;
+}
+
+.pickup-card:hover {
+  border-color: var(--primary-color);
+  background: #f5f5f5;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.pickup-card.selected {
+  border-color: var(--primary-color);
+  background: #e3f2fd;
+  border-width: 3px;
+  box-shadow: 0 5px 15px rgba(46, 125, 50, 0.2);
+}
+
+.pickup-card.selected::before {
+  content: '✓';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 30px;
+  height: 30px;
+  background: var(--primary-color);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border: 2px solid white;
+}
+
+.pickup-card input[type='radio'] {
+  display: none;
+}
+
+.pickup-name {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+}
+
+.pickup-name i {
+  color: var(--primary-color);
+  font-size: 1.3rem;
+}
+
+.pickup-address {
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.pickup-schedule {
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  margin-bottom: 0.75rem;
+  background: #f5f5f5;
+  padding: 0.5rem;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.pickup-schedule i {
+  color: var(--primary-color);
+  margin-right: 0.3rem;
+}
+
+.pickup-card.selected .pickup-schedule {
+  background: white;
+  border: 1px solid var(--primary-color);
+}
+
+/* ===== Mapa ===== */
+.pickup-map {
+  margin-top: 0.5rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.pickup-card.selected .pickup-map {
+  border-color: var(--primary-color);
+}
+
+.pickup-map iframe {
+  width: 100%;
+  height: 150px;
+  border-radius: 8px;
+}
+
+.map-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  font-weight: 500;
+  padding: 0.3rem 0.8rem;
+  background: #f5f5f5;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.map-link:hover {
+  background: var(--primary-color);
+  color: white;
+  text-decoration: none;
+}
+
+.pickup-card.selected .map-link {
+  background: var(--primary-color);
+  color: white;
+}
+
+/* ===== Selector de fecha ===== */
+.pickup-date-selector {
+  background: #f9f9f9;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+  animation: fadeIn 0.3s ease;
+}
+
+.pickup-date-selector label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.pickup-date-selector label i {
+  color: var(--primary-color);
+  margin-right: 0.3rem;
+}
+
+.pickup-date-selector select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 1rem;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.pickup-date-selector select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+}
+
+.pickup-date-selector .help-text {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-top: 0.5rem;
+}
+
+.pickup-date-selector .help-text i {
+  color: var(--primary-color);
+}
+
+.pickup-card.selected .pickup-date-selector {
+  border: 1px solid var(--primary-color);
+  background: white;
+}
+
+/* ===== Información de envío ===== */
+.delivery-info {
+  background: var(--bg-light);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+  border: 1px solid var(--border-color);
+}
+
+.delivery-option.selected .delivery-info {
+  border-color: var(--primary-color);
+  background: #e8f5e9;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  color: var(--text-light);
+}
+
+.info-value {
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+.highlight {
+  color: var(--primary-color);
+  font-weight: 700;
+  background: white;
+  padding: 0.2rem 0.8rem;
+  border-radius: 20px;
+  border: 1px solid var(--primary-color);
+}
+
+/* ===== Campos de dirección ===== */
+.address-fields {
+  margin-top: 1rem;
+}
+
+.address-title {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-dark);
+}
+
+.address-title i {
+  color: var(--primary-color);
+}
+
+.info-message {
+  background: var(--info-bg);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.info-message i {
+  color: var(--info-blue);
+  font-size: 1.5rem;
+}
+
+.info-message span {
+  color: #0369a1;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: all 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+}
+
+.required-field label::after {
+  content: ' *';
+  color: var(--error-color);
+  font-weight: bold;
+}
+
+/* ===== Estados de error ===== */
+.error-message {
+  color: var(--error-color);
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+  display: none;
+}
+
+.error-message.show {
+  display: block;
+}
+
+input.error,
+textarea.error {
+  border-color: var(--error-color) !important;
+  background-color: var(--error-bg);
+}
+
+input:focus.error,
+textarea:focus.error {
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+/* ===== Sección PayPal ===== */
+.paypal-section {
+  background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+  border-radius: 10px;
+  padding: 2rem;
+  margin: 2rem 0;
+  text-align: center;
+  border: 2px solid var(--paypal-blue);
+  box-shadow: 0 5px 15px rgba(0, 112, 186, 0.2);
+}
+
+.paypal-title {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: var(--paypal-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.paypal-description {
+  margin-bottom: 1.5rem;
+  color: var(--text-light);
+}
+
+.paypal-button {
+  background: var(--paypal-blue);
+  color: white;
+  border: none;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  box-shadow: 0 4px 10px rgba(0, 112, 186, 0.3);
+}
+
+.paypal-button:hover {
+  background: var(--paypal-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 112, 186, 0.4);
+}
+
+.paypal-button i {
+  font-size: 1.8rem;
+}
+
+/* ===== Resumen del pedido ===== */
+.order-summary {
+  background: white;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+  height: fit-content;
+  position: sticky;
+  top: 100px;
+}
+
+.summary-title {
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-dark);
+}
+
+.summary-items {
+  margin-bottom: 1rem;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.summary-totals {
+  margin-top: 1rem;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+}
+
+.summary-row.total {
+  padding: 1rem 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-top: 2px solid var(--border-color);
+}
+
+.summary-row.total span:last-child {
+  color: var(--primary-color);
+}
+
+.secure-payment {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.secure-payment i {
+  color: var(--primary-color);
+  margin-right: 0.3rem;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .checkout-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .checkout-container {
+    padding: 0 1rem;
+  }
+
+  .checkout-title {
+    font-size: 1.5rem;
+  }
+
+  .delivery-header {
+    flex-wrap: wrap;
+  }
+
+  .delivery-price {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .pickup-points {
+    padding-left: 0;
+  }
+
+  .pickup-card.selected::before {
+    width: 25px;
+    height: 25px;
+    font-size: 1rem;
+  }
+
+  .paypal-button {
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+  }
+
+  .order-summary {
+    position: static;
+  }
+}
+
+@media (max-width: 480px) {
+  .delivery-option {
+    padding: 1rem;
+  }
+
+  .pickup-card {
+    padding: 1rem;
+  }
+
+  .pickup-name {
+    font-size: 1rem;
+  }
+
+  .pickup-address {
+    font-size: 0.85rem;
+  }
+
+  .pickup-schedule {
+    font-size: 0.8rem;
+  }
+
+  .info-message {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .paypal-section {
+    padding: 1.5rem;
+  }
+}

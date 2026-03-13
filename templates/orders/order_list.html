@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Mis Pedidos - Flores Teya{% endblock %}
+
+{% block content %}
+<div style="max-width: 1200px; margin: 2rem auto; padding: 0 2rem;">
+    <h1 style="font-size: 2rem; color: var(--text-dark); margin-bottom: 2rem;">Mis Pedidos</h1>
+    
+    {% if orders %}
+        <div style="display: grid; gap: 1rem;">
+            {% for order in orders %}
+            <div style="background: white; border-radius: 8px; padding: 1.5rem; box-shadow: var(--shadow-sm);">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem;">Pedido #{{ order.id }}</h3>
+                        <p style="color: var(--text-light);">Fecha: {{ order.created_at|date:"d/m/Y H:i" }}</p>
+                    </div>
+                    <div>
+                        <span style="background: var(--primary-color); color: white; padding: 0.25rem 1rem; border-radius: 20px; font-size: 0.9rem;">
+                            {{ order.get_status_display }}
+                        </span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between;">
+                    <span>Total: <strong>${{ order.total }}</strong></span>
+                    <a href="{% url 'orders:order_detail' order.id %}" style="color: var(--primary-color); text-decoration: none;">Ver detalles →</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div style="text-align: center; padding: 4rem; background: white; border-radius: 8px;">
+            <i class="fas fa-shopping-bag" style="font-size: 4rem; color: var(--text-lighter); margin-bottom: 1rem;"></i>
+            <h2 style="font-size: 1.5rem; color: var(--text-dark); margin-bottom: 1rem;">No tienes pedidos aún</h2>
+            <p style="color: var(--text-light); margin-bottom: 2rem;">¡Empieza a comprar nuestros productos orgánicos!</p>
+            <a href="{% url 'catalog:catalog' %}" style="display: inline-block; padding: 1rem 2rem; background: var(--primary-color); color: white; text-decoration: none; border-radius: 8px;">
+                Ver catálogo
+            </a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,190 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Editar Perfil - Flores Teya{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/profile_edit.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="profile-edit-container">
+    <div class="profile-edit-header">
+        <h1>Editar Perfil</h1>
+        <p>Actualiza tu información personal</p>
+    </div>
+
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <form method="post" class="profile-edit-form" id="profileEditForm">
+        {% csrf_token %}
+
+        <div class="form-grid">
+            <!-- Información básica -->
+            <div class="form-section">
+                <h2><i class="fas fa-user"></i> Información Básica</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="{{ form.first_name.id_for_label }}">
+                            <i class="fas fa-user"></i>
+                            Nombre *
+                        </label>
+                        {{ form.first_name }}
+                        {% if form.first_name.errors %}
+                        <div class="error">{{ form.first_name.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.last_name.id_for_label }}">
+                            <i class="fas fa-user"></i>
+                            Apellidos
+                        </label>
+                        {{ form.last_name }}
+                        {% if form.last_name.errors %}
+                        <div class="error">{{ form.last_name.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.phone.id_for_label }}">
+                        <i class="fas fa-phone"></i>
+                        Teléfono
+                    </label>
+                    {{ form.phone }}
+                    <small class="help-text">Formato: 555-123-4567</small>
+                    {% if form.phone.errors %}
+                    <div class="error">{{ form.phone.errors.0 }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.date_of_birth.id_for_label }}">
+                        <i class="fas fa-birthday-cake"></i>
+                        Fecha de Nacimiento
+                    </label>
+                    {{ form.date_of_birth }}
+                    {% if form.date_of_birth.errors %}
+                    <div class="error">{{ form.date_of_birth.errors.0 }}</div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Dirección -->
+            <!-- Dirección - NUEVA VERSIÓN SOLO MÉRIDA -->
+            <div class="form-section">
+                <h2><i class="fas fa-map-marker-alt"></i> Dirección de Entrega (Mérida)</h2>
+
+                <div class="info-message">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Los pedidos solo se entregan en Mérida, Yucatán</span>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="{{ form.colonia.id_for_label }}">
+                            <i class="fas fa-building"></i>
+                            Colonia *
+                        </label>
+                        {{ form.colonia }}
+                        <small class="help-text">Ej: Centro, García Ginerés, Montebello</small>
+                        {% if form.colonia.errors %}
+                        <div class="error">{{ form.colonia.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="{{ form.calle.id_for_label }}">
+                            <i class="fas fa-road"></i>
+                            Calle *
+                        </label>
+                        {{ form.calle }}
+                        <small class="help-text">Nombre de la calle</small>
+                        {% if form.calle.errors %}
+                        <div class="error">{{ form.calle.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="{{ form.numero_casa.id_for_label }}">
+                            <i class="fas fa-hashtag"></i>
+                            Número de casa
+                        </label>
+                        {{ form.numero_casa }}
+                        <small class="help-text">Opcional - Ej: 123, 45-A, S/N</small>
+                        {% if form.numero_casa.errors %}
+                        <div class="error">{{ form.numero_casa.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="{{ form.entre_calles.id_for_label }}">
+                            <i class="fas fa-exchange-alt"></i>
+                            Entre calles
+                        </label>
+                        {{ form.entre_calles }}
+                        <small class="help-text">Ej: 55 y 57</small>
+                        {% if form.entre_calles.errors %}
+                        <div class="error">{{ form.entre_calles.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="{{ form.referencias.id_for_label }}">
+                            <i class="fas fa-map-pin"></i>
+                            Referencias
+                        </label>
+                        {{ form.referencias }}
+                        <small class="help-text">Ej: Frente al parque, junto a la tienda</small>
+                        {% if form.referencias.errors %}
+                        <div class="error">{{ form.referencias.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preferencias -->
+            <div class="form-section full-width">
+                <h2><i class="fas fa-bell"></i> Preferencias</h2>
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        {{ form.receive_offers }}
+                        <span>Recibir ofertas y promociones por correo</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botones de acción -->
+        <div class="form-actions">
+            <button type="submit" class="btn-save">
+                <i class="fas fa-save"></i>
+                Guardar Cambios
+            </button>
+            <a href="{% url 'accounts:profile' %}" class="btn-cancel">
+                <i class="fas fa-times"></i>
+                Cancelar
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/profile-edit.js' %}"></script>
+{% endblock %}

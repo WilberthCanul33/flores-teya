@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Mi Carrito - Flores Teya{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/cart.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="cart-container">
+    <h1>Tu Carrito de Compras</h1>
+    
+    {% if cart and cart.items.exists %}
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Total</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart.items.all %}
+                <tr>
+                    <td data-label="Producto">{{ item.product.name }}</td>
+                    <td data-label="Cantidad">
+                        <form method="post" action="{% url 'cart:cart_update' item.product.id %}">
+                            {% csrf_token %}
+                            <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
+                            <button type="submit">Actualizar</button>
+                        </form>
+                    </td>
+                    <td data-label="Precio">${{ item.product.price }}</td>
+                    <td data-label="Total">${{ item.get_total }}</td>
+                    <td data-label="Acciones">
+                        <form method="post" action="{% url 'cart:cart_remove' item.product.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-remove">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" data-label="Total General">Total:</td>
+                    <td data-label="Monto Total">${{ cart.get_total }}</td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+        
+        <div class="cart-actions">
+            <a href="{% url 'catalog:catalog' %}" class="btn-continue">Seguir Comprando</a>
+            <a href="{% url 'orders:checkout' %}" class="btn-checkout">Proceder al Pago</a>
+        </div>
+    {% else %}
+        <p>Tu carrito está vacío.</p>
+        <a href="{% url 'catalog:catalog' %}" class="btn-continue">Ver Productos</a>
+    {% endif %}
+</div>
+{% endblock %}

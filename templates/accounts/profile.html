@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Mi Perfil - Flores Teya{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <div class="profile-header">
+        <h1>Mi Perfil</h1>
+    </div>
+
+    <div class="profile-content">
+        <div class="profile-sidebar">
+            <div class="profile-avatar">
+                <div class="avatar-initials">
+                    {{ user.first_name|first|default:user.email|first|upper }}
+                </div>
+            </div>
+            <h2>{{ user.get_full_name|default:user.email }}</h2>
+            <p class="member-since">
+                <i class="fas fa-calendar-alt"></i>
+                Miembro desde {{ user.date_joined|date:"F Y" }}
+            </p>
+            <div class="profile-actions">
+                <a href="{% url 'accounts:profile_edit' %}" class="btn-edit">
+                    <i class="fas fa-edit"></i>
+                    Editar Perfil
+                </a>
+            </div>
+        </div>
+
+        <div class="profile-details">
+            <div class="details-section">
+                <h3><i class="fas fa-map-marker-alt"></i> Dirección de Entrega (Mérida)</h3>
+                <div class="info-grid">
+                    <div class="info-item full-width">
+                        <label><i class="fas fa-building"></i> Colonia</label>
+                        <p>{{ user.colonia|default:"No especificada" }}</p>
+                    </div>
+                    <div class="info-item full-width">
+                        <label><i class="fas fa-road"></i> Calle</label>
+                        <p>{{ user.calle|default:"No especificada" }}</p>
+                    </div>
+                    <div class="info-item">
+                        <label><i class="fas fa-hashtag"></i> Número</label>
+                        <p>{{ user.numero_casa|default:"No especificado" }}</p>
+                    </div>
+                    <div class="info-item">
+                        <label><i class="fas fa-exchange-alt"></i> Entre calles</label>
+                        <p>{{ user.entre_calles|default:"No especificado" }}</p>
+                    </div>
+                    <div class="info-item full-width">
+                        <label><i class="fas fa-map-pin"></i> Referencias</label>
+                        <p>{{ user.referencias|default:"No especificadas" }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="details-section">
+                <h3><i class="fas fa-bell"></i> Preferencias</h3>
+                <div class="preferences">
+                    <div class="preference-item">
+                        <span><i class="fas fa-envelope-open-text"></i> Recibir ofertas y promociones</span>
+                        <span class="preference-value">{% if user.receive_offers %}Sí{% else %}No{% endif %}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="details-section">
+                <h3><i class="fas fa-shopping-bag"></i> Actividad Reciente</h3>
+                <div class="recent-activity">
+                    <p class="no-activity">No hay actividad reciente para mostrar.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

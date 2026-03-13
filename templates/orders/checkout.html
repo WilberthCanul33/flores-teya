@@ -1,0 +1,239 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  Checkout - Flores Teya
+{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div class="checkout-container">
+    <h1 class="checkout-title">Finalizar Compra</h1>
+
+    <div class="checkout-grid">
+      <!-- Formulario de checkout -->
+      <div class="checkout-form-container">
+        <form method="post" id="checkoutForm" novalidate>
+          {% csrf_token %}
+
+          <!-- SECCIÓN: Método de entrega -->
+          <div class="delivery-section">
+            <h2 class="section-title">
+              <i class="fas fa-truck"></i>
+              Método de entrega
+            </h2>
+
+            <!-- Opción 1: Recoger en punto físico -->
+            <div class="delivery-option" onclick="CheckoutApp.selectDeliveryMethod('pickup', event)">
+              <input type="radio" name="delivery_method" id="method_pickup" value="pickup" />
+              <div class="delivery-header">
+                <i class="fas fa-store"></i>
+                <h3>Recoger en punto físico</h3>
+                <span class="delivery-price">Gratis</span>
+              </div>
+
+              <!-- Puntos de recogida -->
+              <div class="pickup-points" id="pickupPoints" style="display: none;">
+                <!-- Punto 1 - Mercado -->
+                <div class="pickup-card" onclick="CheckoutApp.selectPickupPoint('mercado', event)">
+                  <input type="radio" name="pickup_point" id="point_mercado" value="mercado" />
+                  <div class="pickup-name">
+                    <i class="fas fa-store-alt"></i>
+                    📍 Punto 1 – Mercado
+                  </div>
+                  <div class="pickup-address">Av. Principal #123, Centro</div>
+                  <div class="pickup-schedule">
+                    <i class="fas fa-clock"></i>
+                    Solo sábados de 8:00 AM a 1:00 PM
+                  </div>
+                  <div class="pickup-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.661111111111!2d-99.133333!3d19.433333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDI2JzAwLjAiTiA5OcKwMDgnMDAuMCJX!5e0!3m2!1ses!2smx!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+                    <a href="https://maps.google.com/?q=Mercado+Central" target="_blank" class="map-link">
+                      <i class="fas fa-external-link-alt"></i>
+                      Ver en Google Maps
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Punto 2 - Segundo lugar físico -->
+                <div class="pickup-card" onclick="CheckoutApp.selectPickupPoint('segundo_lugar', event)">
+                  <input type="radio" name="pickup_point" id="point_segundo" value="segundo_lugar" />
+                  <div class="pickup-name">
+                    <i class="fas fa-building"></i>
+                    📍 Punto 2 – Segundo lugar físico
+                  </div>
+                  <div class="pickup-address">Calle Secundaria #456, Colonia Centro</div>
+                  <div class="pickup-schedule">
+                    <i class="fas fa-clock"></i>
+                    Lunes a sábado de 7:00 AM a 5:00 PM
+                  </div>
+                  <!-- Selector de fecha para el punto 2 -->
+                  <div class="pickup-date-selector" id="pickupDateSelector" style="display: none;">
+                    <label>
+                      <i class="fas fa-calendar-alt"></i>
+                      Selecciona el día de recogida:
+                    </label>
+                    <select name="pickup_date" id="pickupDate" class="filter-select">
+                      <option value="">-- Elige un día --</option>
+                    </select>
+                    <p class="help-text">
+                      <i class="fas fa-info-circle"></i>
+                      Horario disponible: Lunes a sábado de 7:00 AM a 5:00 PM
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Opción 2: Envío a domicilio -->
+            <div class="delivery-option" onclick="CheckoutApp.selectDeliveryMethod('home', event)">
+              <input type="radio" name="delivery_method" id="method_home" value="home_delivery" />
+              <div class="delivery-header">
+                <i class="fas fa-home"></i>
+                <h3>Envío a domicilio</h3>
+                <span class="delivery-price">+$50.00</span>
+              </div>
+
+              <!-- Información de envío -->
+              <div id="homeDeliveryInfo" style="display: none;">
+                <div class="delivery-info">
+                  <div class="info-row">
+                    <span class="info-label">Costo de envío:</span>
+                    <span class="info-value highlight">$50.00</span>
+                  </div>
+                  <div class="info-row">
+                    <span class="info-label">Días de entrega:</span>
+                    <span class="info-value">Martes y Viernes</span>
+                  </div>
+                  <div class="info-row">
+                    <span class="info-label">Horario:</span>
+                    <span class="info-value">9:00 AM - 6:00 PM</span>
+                  </div>
+                  <div class="info-row">
+                    <span class="info-label">Fecha estimada:</span>
+                    <span class="info-value highlight">{{ estimated_delivery|date:'l d F Y' }}</span>
+                  </div>
+                </div>
+
+                <!-- Campos de dirección -->
+                <div class="address-fields">
+                  <h3 class="address-title">
+                    <i class="fas fa-map-marker-alt"></i>
+                    Dirección de Entrega (Mérida)
+                  </h3>
+
+                  <div class="info-message">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Los pedidos solo se entregan en Mérida, Yucatán</span>
+                  </div>
+
+                  <div class="form-group required-field">
+                    <label>Colonia *</label>
+                    <input type="text" name="colonia" id="colonia" value="{{ request.user.colonia }}" />
+                    <div class="error-message" id="colonia-error">La colonia es obligatoria</div>
+                  </div>
+
+                  <div class="form-group required-field">
+                    <label>Calle *</label>
+                    <input type="text" name="calle" id="calle" value="{{ request.user.calle }}" />
+                    <div class="error-message" id="calle-error">La calle es obligatoria</div>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Número de casa (opcional)</label>
+                    <input type="text" name="numero_casa" id="numero_casa" value="{{ request.user.numero_casa }}" />
+                  </div>
+
+                  <div class="form-group">
+                    <label>Entre calles</label>
+                    <input type="text" name="entre_calles" id="entre_calles" value="{{ request.user.entre_calles }}" />
+                  </div>
+
+                  <div class="form-group">
+                    <label>Referencias</label>
+                    <textarea name="referencias" id="referencias" rows="2">{{ request.user.referencias }}</textarea>
+                  </div>
+
+                  <div class="form-group required-field">
+                    <label>Teléfono de contacto *</label>
+                    <input type="text" name="phone" id="phone" value="{{ request.user.phone }}" />
+                    <div class="error-message" id="phone-error">El teléfono es obligatorio</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Notas adicionales -->
+          <div class="form-group">
+            <label>Notas adicionales (opcional)</label>
+            <textarea name="notes" rows="3" placeholder="Instrucciones especiales para la entrega..."></textarea>
+          </div>
+
+          <!-- SECCIÓN: Pago con PayPal -->
+          <div class="paypal-section">
+            <h2 class="paypal-title">
+              <i class="fab fa-paypal"></i>
+              Pago seguro con PayPal
+            </h2>
+            <p class="paypal-description">Serás redirigido a PayPal para completar tu pago de forma segura.</p>
+            <button type="submit" class="paypal-button">
+              <i class="fab fa-paypal"></i>
+              Pagar con PayPal
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Resumen del pedido -->
+      <div class="order-summary">
+        <h2 class="summary-title">Resumen del pedido</h2>
+
+        <div class="summary-items">
+          {% for item in cart.items.all %}
+            <div class="summary-item">
+              <span>{{ item.product.name }} x{{ item.quantity }}</span>
+              <span>${{ item.get_total|floatformat:2 }}</span>
+            </div>
+          {% endfor %}
+        </div>
+
+        <div class="summary-totals">
+          <div class="summary-row">
+            <span>Subtotal:</span>
+            <span>${{ subtotal|floatformat:2 }}</span>
+          </div>
+          <div class="summary-row" id="shippingRow">
+            <span>Envío:</span>
+            <span id="shippingAmount">$0.00</span>
+          </div>
+          <div class="summary-row total">
+            <span>Total:</span>
+            <span id="totalAmount">${{ total|floatformat:2 }}</span>
+          </div>
+        </div>
+
+        <p class="secure-payment">
+          <i class="fas fa-lock"></i>
+          Pago 100% seguro con PayPal
+        </p>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'js/checkout.js' %}"></script>
+  <script>
+    // Inicializar la aplicación con datos del servidor
+    document.addEventListener('DOMContentLoaded', function() {
+      CheckoutApp.init({
+        homeDeliveryCost: {{ home_delivery_cost }},
+        subtotal: {{ subtotal }}
+      });
+    });
+  </script>
+{% endblock %}

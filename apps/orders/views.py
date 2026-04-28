@@ -272,8 +272,26 @@ def checkout_view(request):
             messages.error(request, f'Error al procesar el pago: {str(e)}')
             return redirect('orders:order_detail', order_id=order.id)
     
-    # ===== MÉTODO GET =====
+        # ===== MÉTODO GET =====
     estimated_delivery = calculate_delivery_date()
+
+    # Agregar puntos de recogida al contexto
+    pickup_points = {
+        'mercado': {
+            'name': 'Mercado',
+            'address': 'Carr. Mérida - Progreso, Gonzalo Guerrero, 97115 Mérida, Yuc.',
+            'map_url': 'https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d119205.19228420936!2d-89.62852145!3d20.98613195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x8f56754165460e8d%3A0x63cb94ef7a362c1c!2sMercado%20Agroecol%C3%B3gico%20Riqueza%20local%2C%20Carr.%20M%C3%A9rida%20-%20Progreso%2C%20Gonzalo%20Guerrero%2C%2097115%20M%C3%A9rida%2C%20Yuc.!3m2!1d21.027466399999998!2d-89.6259236!5e0!3m2!1sen!2smx!4v1777344469667!5m2!1sen!2smx',
+            'schedule': 'Solo sábados de 8:00 AM a 1:00 PM',
+            'icon': 'fa-store'
+        },
+        'segundo_lugar': {
+            'name': 'Teya',
+            'address': 'Carretera Mérida- Cancún Kilometro 11.2, Yucatán, Hacienda Teya, 97370 Mérida, Yuc.',
+            'map_url': 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.661111111111!2d-89.6259236!3d21.0274664!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f56754165460e8d%3A0x63cb94ef7a362c1c!2sMercado%20Agroecol%C3%B3gico%20Riqueza%20local!5e0!3m2!1ses!2smx!4v1740000000000!5m2!1ses!2smx',
+            'schedule': 'Lunes a sábado de 7:00 AM a 5:00 PM',
+            'icon': 'fa-building'
+        }
+    }
     
     context = {
         'cart': cart,
@@ -282,6 +300,7 @@ def checkout_view(request):
         'total': subtotal,
         'home_delivery_cost': HOME_DELIVERY_COST,
         'estimated_delivery': estimated_delivery,
+        'pickup_points': pickup_points,
     }
     return render(request, 'orders/checkout.html', context)
     

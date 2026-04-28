@@ -41,43 +41,43 @@
                 <div class="pickup-card" onclick="CheckoutApp.selectPickupPoint('mercado', event)">
                   <input type="radio" name="pickup_point" id="point_mercado" value="mercado" />
                   <div class="pickup-name">
-                    <i class="fas fa-store-alt"></i>
-                    📍 Punto 1 – Mercado
+                    <i class="fas {{ pickup_points.mercado.icon }}"></i>
+                    📍 {{ pickup_points.mercado.name }}
                   </div>
-                  <div class="pickup-address">Av. Principal #123, Centro</div>
+                  <div class="pickup-address">{{ pickup_points.mercado.address }}</div>
                   <div class="pickup-schedule">
                     <i class="fas fa-clock"></i>
-                    Solo sábados de 8:00 AM a 1:00 PM
+                    {{ pickup_points.mercado.schedule }}
                   </div>
                   <div class="pickup-map">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.661111111111!2d-99.133333!3d19.433333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDI2JzAwLjAiTiA5OcKwMDgnMDAuMCJX!5e0!3m2!1ses!2smx!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
-                    <a href="https://maps.google.com/?q=Mercado+Central" target="_blank" class="map-link">
+                    <iframe src="{{ pickup_points.mercado.map_url }}" allowfullscreen="" loading="lazy"></iframe>
+                    <a href="{{ pickup_points.mercado.map_url }}" target="_blank" class="map-link">
                       <i class="fas fa-external-link-alt"></i>
                       Ver en Google Maps
                     </a>
                   </div>
                 </div>
 
-                <!-- Punto 2 - Segundo lugar físico -->
+                <!-- Punto 2 - Teya -->
                 <div class="pickup-card" onclick="CheckoutApp.selectPickupPoint('segundo_lugar', event)">
                   <input type="radio" name="pickup_point" id="point_segundo" value="segundo_lugar" />
                   <div class="pickup-name">
-                    <i class="fas fa-building"></i>
-                    📍 Punto 2 – Segundo lugar físico
+                    <i class="fas {{ pickup_points.segundo_lugar.icon }}"></i>
+                    📍 {{ pickup_points.segundo_lugar.name }}
                   </div>
-                  <div class="pickup-address">Calle Secundaria #456, Colonia Centro</div>
+                  <div class="pickup-address">{{ pickup_points.segundo_lugar.address }}</div>
                   <div class="pickup-schedule">
                     <i class="fas fa-clock"></i>
-                    Lunes a sábado de 7:00 AM a 5:00 PM
+                    {{ pickup_points.segundo_lugar.schedule }}
                   </div>
                   <div class="pickup-map">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.661111111111!2d-99.133333!3d19.433333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDI2JzAwLjAiTiA5OcKwMDgnMDAuMCJX!5e0!3m2!1ses!2smx!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
-                    <a href="https://maps.google.com/?q=Segundo+Lugar" target="_blank" class="map-link">
+                    <iframe src="{{ pickup_points.segundo_lugar.map_url }}" allowfullscreen="" loading="lazy"></iframe>
+                    <a href="{{ pickup_points.segundo_lugar.map_url }}" target="_blank" class="map-link">
                       <i class="fas fa-external-link-alt"></i>
                       Ver en Google Maps
                     </a>
                   </div>
-                  <!-- Selector de fecha para el punto 2 -->
+                  <!-- Selector de fecha para Teya -->
                   <div class="pickup-date-selector" id="pickupDateSelector" style="display: none;">
                     <label>
                       <i class="fas fa-calendar-alt"></i>
@@ -88,7 +88,7 @@
                     </select>
                     <p class="help-text">
                       <i class="fas fa-info-circle"></i>
-                      Horario disponible: Lunes a sábado de 7:00 AM a 5:00 PM
+                      Horario disponible: {{ pickup_points.segundo_lugar.schedule }}
                     </p>
                   </div>
                 </div>

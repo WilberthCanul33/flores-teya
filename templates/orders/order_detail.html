@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block extra_css %}
-  <link rel="stylesheet" href="{% static 'css/order-detail.css' %}">
+  <link rel="stylesheet" href="{% static 'css/order-detail.css' %}" />
 {% endblock %}
 
 {% block content %}
@@ -185,39 +185,44 @@
             </div>
 
             {% if order.delivery_method == 'pickup' and order.pickup_point %}
-              <div class="info-row">
-                <span class="info-label">Punto de recogida:</span>
-                <span class="info-value pickup-point" data-point="{{ order.pickup_point }}">
-                  {% if order.pickup_point == 'mercado' %}
-                    📍 Punto 1 – Mercado
-                  {% else %}
-                    📍 Punto 2 – Segundo lugar físico
-                  {% endif %}
-                </span>
-              </div>
-
-              <!-- Mostrar horario según el punto -->
-              <div class="info-row schedule-row" data-point="{{ order.pickup_point }}">
-                <span class="info-label">Horario disponible:</span>
-                <span class="info-value">
-                  {% if order.pickup_point == 'mercado' %}
-                    <i class="fas fa-clock"></i> Sábados 8:00 AM - 1:00 PM
-                  {% else %}
-                    <i class="fas fa-clock"></i> Lunes a sábado 7:00 AM - 5:00 PM
-                  {% endif %}
-                </span>
-              </div>
-
-              <!-- Mostrar la fecha seleccionada para el punto 2 -->
-              {% if order.pickup_point == 'segundo_lugar' and order.pickup_date %}
-                <div class="info-row pickup-date-row">
-                  <span class="info-label">Fecha de recogida seleccionada:</span>
-                  <span class="info-value highlight">
-                    <i class="fas fa-calendar-check"></i>
-                    {{ order.pickup_date|date:'l d F Y' }}
-                  </span>
+              {% with details=order.get_pickup_point_details %}
+                <div class="info-row">
+                  <span class="info-label">Punto de recogida:</span>
+                  <span class="info-value pickup-point" data-point="{{ order.pickup_point }}">📍 {{ details.name }}</span>
                 </div>
-              {% endif %}
+                <div class="info-row schedule-row" data-point="{{ order.pickup_point }}">
+                  <span class="info-label">Dirección:</span>
+                  <span class="info-value">{{ details.address }}</span>
+                </div>
+                <div class="info-row schedule-row" data-point="{{ order.pickup_point }}">
+                  <span class="info-label">Horario disponible:</span>
+                  <span class="info-value"><i class="fas fa-clock"></i> {{ details.schedule }}</span>
+                </div>
+              {% endwith %}
+            {% endif %}
+            
+            <!-- Mostrar horario según el punto -->
+            <div class="info-row schedule-row" data-point="{{ order.pickup_point }}">
+              <span class="info-label">Horario disponible:</span>
+              <span class="info-value">
+                {% if order.pickup_point == 'mercado' %}
+                  <i class="fas fa-clock"></i> Sábados 8:00 AM - 1:00 PM
+                {% else %}
+                  <i class="fas fa-clock"></i> Lunes a sábado 7:00 AM - 5:00 PM
+                {% endif %}
+              </span>
+            </div>
+
+            <!-- Mostrar la fecha seleccionada para el punto 2 -->
+            {% if order.pickup_point == 'segundo_lugar' and order.pickup_date %}
+              <div class="info-row pickup-date-row">
+                <span class="info-label">Fecha de recogida seleccionada:</span>
+                <span class="info-value highlight">
+                  <i class="fas fa-calendar-check"></i>
+                  {{ order.pickup_date|date:'l d F Y' }}
+                </span>
+              </div>
+            {% endif %}
             {% endif %}
 
             <!-- Fecha estimada de entrega (solo para envío a domicilio) -->

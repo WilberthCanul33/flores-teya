@@ -122,6 +122,9 @@ EMAIL_HOST_PASSWORD=tu-contraseña-de-aplicacion
 SITE_URL=https://tu-dominio.com
 
 
+### 💰 PayPal (para pagos reales)
+
+```env
 # Cambiar de sandbox a live
 PAYPAL_MODE=live
 

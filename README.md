@@ -112,6 +112,8 @@ Al desplegar este proyecto en un servidor real, se deben realizar las siguientes
 
 ### 📧 Correo Electrónico (para que lleguen los emails de verificación)
 
+Cambia la configuración de correo de pruebas (Mailtrap) a un servidor SMTP real como Gmail.
+
 ```env
 # Cambiar de True a False
 USE_MAILTRAP=False
@@ -120,9 +122,11 @@ USE_MAILTRAP=False
 EMAIL_HOST_USER=tu-email-real@gmail.com
 EMAIL_HOST_PASSWORD=tu-contraseña-de-aplicacion
 SITE_URL=https://tu-dominio.com
-
+```
 
 ### 💰 PayPal (para pagos reales)
+
+Si ya has probado los pagos en modo Sandbox (pruebas), cámbialo a **Live** para que los pagos sean reales.
 
 ```env
 # Cambiar de sandbox a live
@@ -133,8 +137,14 @@ PAYPAL_CLIENT_ID=ID_LIVE_DE_PAYPAL
 PAYPAL_CLIENT_SECRET=SECRET_LIVE_DE_PAYPAL
 PAYPAL_RETURN_URL=https://tu-dominio.com/orders/payment-done/
 PAYPAL_CANCEL_URL=https://tu-dominio.com/orders/payment-cancelled/
+```
 
+### 🔒 Seguridad
 
+Para el entorno de producción, es vital cambiar estas configuraciones:
+
+```env
 # Cambiar en producción
 DEBUG=False
 ALLOWED_HOSTS=['tu-dominio.com']
+```

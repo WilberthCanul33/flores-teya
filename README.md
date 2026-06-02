@@ -104,3 +104,34 @@ Este archivo incluye variables como:
 * Docker
 * HTML / CSS / JavaScript
 * PayPal API
+
+
+## ⚠️ Configuraciones necesarias para Producción
+
+Al desplegar este proyecto en un servidor real, se deben realizar las siguientes configuraciones en el archivo `.env` del servidor:
+
+### 📧 Correo Electrónico (para que lleguen los emails de verificación)
+
+```env
+# Cambiar de True a False
+USE_MAILTRAP=False
+
+# Agregar credenciales de Gmail real
+EMAIL_HOST_USER=tu-email-real@gmail.com
+EMAIL_HOST_PASSWORD=tu-contraseña-de-aplicacion
+SITE_URL=https://tu-dominio.com
+
+
+# Cambiar de sandbox a live
+PAYPAL_MODE=live
+
+# Usar credenciales LIVE (no las de sandbox)
+PAYPAL_CLIENT_ID=ID_LIVE_DE_PAYPAL
+PAYPAL_CLIENT_SECRET=SECRET_LIVE_DE_PAYPAL
+PAYPAL_RETURN_URL=https://tu-dominio.com/orders/payment-done/
+PAYPAL_CANCEL_URL=https://tu-dominio.com/orders/payment-cancelled/
+
+
+# Cambiar en producción
+DEBUG=False
+ALLOWED_HOSTS=['tu-dominio.com']

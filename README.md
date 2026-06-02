@@ -163,10 +163,6 @@ PAYPAL_CANCEL_URL=https://tu-dominio.com/orders/payment-cancelled/```
 
 ### 🔒 Seguridad
 
-Para el entorno de producción, es vital cambiar estas configuraciones:
-
-```env
 # Cambiar en producción
 DEBUG=False
 ALLOWED_HOSTS=['tu-dominio.com']
-```

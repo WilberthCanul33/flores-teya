@@ -128,6 +128,8 @@ SITE_URL=https://tu-dominio.com
 
 ### 💰 PayPal (para pagos reales)
 
+**IMPORTANTE:** Por defecto, PayPal está en modo **Sandbox** (pruebas, dinero ficticio). Para recibir pagos reales, debes cambiarlo a **Live**.
+
 Si ya has probado los pagos en modo Sandbox (pruebas), cámbialo a **Live** para que los pagos sean reales.
 
 ```env

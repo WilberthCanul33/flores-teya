@@ -222,5 +222,5 @@ else:
     EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
     print("📧 Usando GMAIL REAL para emails")
 
-DEFAULT_FROM_EMAIL = 'Organic Veggies <noreply@organicveggies.com>'
-SITE_URL = 'http://localhost:8000'  # Cambiar en producción
+DDEFAULT_FROM_EMAIL = 'Organic Veggies <noreply@organicveggies.com>'
+SITE_URL = config('SITE_URL', default='http://localhost:8000')

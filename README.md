@@ -127,7 +127,16 @@ SITE_URL=https://tu-dominio.com
 
 # 🔴 CRÍTICO: Debe ser tu dominio real, NO localhost.
 SITE_URL=https://tu-dominio.com
+
 ```
+
+```markdown
+### 🔗 Variable SITE_URL (CRÍTICA para emails)
+
+En `settings.py`, `SITE_URL` se configura así:
+
+```python
+SITE_URL = config('SITE_URL', default='http://localhost:8000')
 
 ### 💰 PayPal (para pagos reales)
 

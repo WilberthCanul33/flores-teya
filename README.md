@@ -112,6 +112,8 @@ Al desplegar este proyecto en un servidor real, se deben realizar las siguientes
 
 ### 📧 Correo Electrónico (para que lleguen los emails de verificación)
 
+**IMPORTANTE:** Para que los correos de verificación lleguen a los usuarios reales, debes usar una cuenta de Gmail y generar una **Contraseña de Aplicación** (requiere tener verificación en dos pasos activada).
+
 Cambia la configuración de correo de pruebas (Mailtrap) a un servidor SMTP real como Gmail.
 
 ```env

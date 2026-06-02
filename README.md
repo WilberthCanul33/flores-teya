@@ -152,8 +152,7 @@ Para que los pagos funcionen, necesitas obtener tus credenciales de PayPal:
 5. Actualiza las URLs de retorno con tu dominio real:
 
 ```env
-PAYPAL_RETURN_URL=https://tudominio.com/orders/payment-done/
-PAYPAL_CANCEL_URL=https://tudominio.com/orders/payment-cancelled/
+
 
 Si ya has probado los pagos en modo Sandbox (pruebas), cámbialo a **Live** para que los pagos sean reales.
 

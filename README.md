@@ -130,11 +130,11 @@ SITE_URL=https://tu-dominio.com
 
 **IMPORTANTE:** Por defecto, PayPal está en modo **Sandbox** (pruebas, dinero ficticio). Para recibir pagos reales, debes cambiarlo a **Live**.
 
-## 🔐 Configuración de PayPal
+#### 🔐 Configuración de PayPal
 
 Para que los pagos funcionen, necesitas obtener tus credenciales de PayPal:
 
-### Para pruebas (Sandbox) - Dinero ficticio
+**Para pruebas (Sandbox) - Dinero ficticio:**
 
 1. Ve a [https://developer.paypal.com/dashboard/](https://developer.paypal.com/dashboard/)
 2. Inicia sesión con tu cuenta de PayPal
@@ -143,18 +143,13 @@ Para que los pagos funcionen, necesitas obtener tus credenciales de PayPal:
 5. Crea una aplicación o usa la que tengas
 6. Copia el **Client ID** y **Client Secret** de Sandbox
 
-### Para producción (Live) - Dinero real
+**Para producción (Live) - Dinero real:**
 
 1. Cambia el toggle de **Sandbox** a **Live**
 2. Crea una aplicación o usa la que tengas
 3. Copia el **Client ID** y **Client Secret** de Live
 4. En tu archivo `.env`, cambia `PAYPAL_MODE=sandbox` a `PAYPAL_MODE=live`
 5. Actualiza las URLs de retorno con tu dominio real:
-
-```env
-
-
-Si ya has probado los pagos en modo Sandbox (pruebas), cámbialo a **Live** para que los pagos sean reales.
 
 ```env
 # Cambiar de sandbox a live
@@ -164,8 +159,7 @@ PAYPAL_MODE=live
 PAYPAL_CLIENT_ID=ID_LIVE_DE_PAYPAL
 PAYPAL_CLIENT_SECRET=SECRET_LIVE_DE_PAYPAL
 PAYPAL_RETURN_URL=https://tu-dominio.com/orders/payment-done/
-PAYPAL_CANCEL_URL=https://tu-dominio.com/orders/payment-cancelled/
-```
+PAYPAL_CANCEL_URL=https://tu-dominio.com/orders/payment-cancelled/```
 
 ### 🔒 Seguridad
 

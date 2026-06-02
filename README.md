@@ -124,6 +124,9 @@ USE_MAILTRAP=False
 EMAIL_HOST_USER=tu-email-real@gmail.com
 EMAIL_HOST_PASSWORD=tu-contraseña-de-aplicacion
 SITE_URL=https://tu-dominio.com
+
+# 🔴 CRÍTICO: Debe ser tu dominio real, NO localhost.
+SITE_URL=https://tu-dominio.com
 ```
 
 ### 💰 PayPal (para pagos reales)

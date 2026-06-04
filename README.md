@@ -43,8 +43,6 @@ cp .env.example .env
 Luego editar el archivo `.env` con tus credenciales necesarias.
 
 
-## 🚀 Despliegue en producción (con Gunicorn + Nginx)
-
 ## 🔧 Modos de ejecución
 
 ### Modo desarrollo (para programar y probar localmente)
@@ -84,6 +82,8 @@ http://localhost:8000/
 Panel de administración:
 http://localhost:8000/admin
 
+
+## 🚀 Despliegue en producción (con Gunicorn + Nginx)
 
 > ⚠️ **Solo para servidor real, NO para desarrollo local**
 

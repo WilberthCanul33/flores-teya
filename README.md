@@ -69,31 +69,43 @@ docker-compose -f docker-compose.prod.yml up -d
 
 ## Migrar base de datos
 
+```bash
 docker-compose -f docker-compose.prod.yml exec web python manage.py migrate
+```
 
 ## Cargar productos iniciales (opcional)
 
+```bash
 docker-compose -f docker-compose.prod.yml exec web python scripts/load_products.py
+```
 
 ## Verificar que todo funciona
 
+```bash
 docker-compose -f docker-compose.prod.yml ps
+```
 
+```bash
 docker-compose -f docker-compose.prod.yml logs -f web
+```
 
 ## Crear superusuario en producción
 
+```bash
 docker-compose -f docker-compose.prod.yml exec web python manage.py createsuperuser
+```
 
 ## Ver estado de los contenedores
 
+```bash
 docker-compose -f docker-compose.prod.yml ps
-
+```
 
 ## Ver logs
 
+```bash
 docker-compose -f docker-compose.prod.yml logs -f web
-
+```
 
 
 

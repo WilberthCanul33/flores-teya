@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: organic_veggies_db
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=${DOCKER_DB_NAME}
+      - POSTGRES_USER=${DOCKER_DB_USER}
+      - POSTGRES_PASSWORD=${DOCKER_DB_PASSWORD}
+    expose:
+      - "5432"  # Solo expone internamente, no al host
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DOCKER_DB_USER} -d ${DOCKER_DB_NAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - internal_network
+
+  web:
+    build: .
+    container_name: organic_veggies_web
+    restart: always
+    env_file:
+      - .env   # 👈 AGREGA ESTA LÍNEA
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py collectstatic --noinput &&
+             gunicorn organic_veggies.wsgi:application --bind 0.0.0.0:8000"
+    environment:
+      - DOCKER_CONTAINER=true
+    expose:
+      - "8000"  # Solo expone internamente, no al host
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - internal_network
+
+  nginx:
+    image: nginx:alpine
+    container_name: organic_veggies_nginx
+    restart: always
+    ports:
+      - "80:80"      # HTTP
+      - "443:443"    # HTTPS (si tienes SSL)
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./staticfiles:/staticfiles
+      - ./media:/media
+    depends_on:
+      - web
+    networks:
+      - internal_network
+
+volumes:
+  postgres_data:
+
+networks:
+  internal_network:
+    driver: bridge

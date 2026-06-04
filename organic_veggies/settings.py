@@ -15,7 +15,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['*']  # Cambiar en producción
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
 
 
 
@@ -206,10 +206,10 @@ USE_MAILTRAP = config('USE_MAILTRAP', default=False, cast=bool)
 if USE_MAILTRAP:
     # Usar Mailtrap (para pruebas)
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
-    EMAIL_PORT = 2525
-    EMAIL_HOST_USER = '99cb61f5819f26'
-    EMAIL_HOST_PASSWORD = '55cf2f8c2b838e'
+    EMAIL_HOST = config('MAILTRAP_HOST', default='sandbox.smtp.mailtrap.io')
+    EMAIL_PORT = config('MAILTRAP_PORT', default=2525, cast=int)
+    EMAIL_HOST_USER = config('MAILTRAP_USER', default='')
+    EMAIL_HOST_PASSWORD = config('MAILTRAP_PASSWORD', default='')
     EMAIL_USE_TLS = True
     print("📧 Usando MAILTRAP para emails de prueba")
 else:
@@ -222,5 +222,8 @@ else:
     EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
     print("📧 Usando GMAIL REAL para emails")
 
-DDEFAULT_FROM_EMAIL = 'Organic Veggies <noreply@organicveggies.com>'
+DEFAULT_FROM_EMAIL = 'Organic Veggies <noreply@organicveggies.com>'
 SITE_URL = config('SITE_URL', default='http://localhost:8000')
+
+# Whitenoise para archivos estáticos en producción
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

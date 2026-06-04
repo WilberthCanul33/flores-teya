@@ -61,7 +61,9 @@ ALLOWED_HOSTS=flores.inmerso.io,www.flores.inmerso.io
 
 ```bash
 docker-compose -f docker-compose.prod.yml build
+```
 
+```bash
 docker-compose -f docker-compose.prod.yml up -d
 ```
 

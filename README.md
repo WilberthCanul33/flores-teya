@@ -219,7 +219,7 @@ USE_MAILTRAP=False
 # Agregar credenciales de Gmail real
 EMAIL_HOST_USER=tu-email-real@gmail.com
 EMAIL_HOST_PASSWORD=tu-contraseña-de-aplicacion
-SITE_URL=https://tu-dominio.com
+
 
 # 🔴 CRÍTICO: Configurar según el entorno
 SITE_URL=http://localhost:8000   # Desarrollo local

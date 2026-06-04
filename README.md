@@ -66,6 +66,7 @@ openssl rand -base64 50
 # Opción 3: Usando el generador online (desconectado de internet)
 # https://djecrety.ir/
 
+```
 
 ## 🔧 Modos de ejecución
 

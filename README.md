@@ -160,17 +160,6 @@ docker-compose -f docker-compose.prod.yml logs -f web
 docker-compose -f docker-compose.prod.yml exec web python manage.py createsuperuser
 ```
 
-## Ver estado de los contenedores
-
-```bash
-docker-compose -f docker-compose.prod.yml ps
-```
-
-## Ver logs
-
-```bash
-docker-compose -f docker-compose.prod.yml logs -f web
-```
 
 
 

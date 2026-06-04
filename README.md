@@ -45,6 +45,46 @@ Luego editar el archivo `.env` con tus credenciales necesarias.
 
 ## 🚀 Despliegue en producción (con Gunicorn + Nginx)
 
+## 🔧 Modos de ejecución
+
+### Modo desarrollo (para programar y probar localmente)
+
+# 3. Levantar los contenedores
+
+```bash
+docker-compose up -d
+```
+
+# 4. Ejecutar migraciones
+
+```bash
+docker-compose exec web python manage.py migrate
+```
+
+# 5. Cargar productos (opcional)
+
+```bash
+docker-compose exec web python scripts/load_products.py
+```
+
+# 6. Crear superusuario
+
+```bash
+docker-compose exec web python manage.py createsuperuser
+```
+
+
+# 🌐 Acceso al sistema
+
+Una vez ejecutado el proyecto:
+
+Tienda:
+http://localhost:8000/
+
+Panel de administración:
+http://localhost:8000/admin
+
+
 > ⚠️ **Solo para servidor real, NO para desarrollo local**
 
 ### Configurar `.env` con variables de producción

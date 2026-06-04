@@ -42,6 +42,30 @@ cp .env.example .env
 
 Luego editar el archivo `.env` con tus credenciales necesarias.
 
+### 🔐 SECRET_KEY (CRÍTICO para seguridad)
+
+La `SECRET_KEY` es una clave secreta que Django utiliza para:
+- Firmar cookies de sesión
+- Proteger tokens CSRF
+- Firmar mensajes de reseteo de contraseña
+
+**⚠️ IMPORTANTE:**
+- **NUNCA** uses la clave de ejemplo en producción
+- **NUNCA** compartas tu `SECRET_KEY` públicamente
+- **DEBE** ser única para cada despliegue
+
+**Cómo generar una SECRET_KEY segura:**
+
+```bash
+# Opción 1: Usando Python
+python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+
+# Opción 2: Usando openssl (si está disponible)
+openssl rand -base64 50
+
+# Opción 3: Usando el generador online (desconectado de internet)
+# https://djecrety.ir/
+
 
 ## 🔧 Modos de ejecución
 

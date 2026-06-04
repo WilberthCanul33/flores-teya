@@ -115,10 +115,10 @@ docker-compose -f docker-compose.prod.yml logs -f web
 Una vez ejecutado el proyecto:
 
 Tienda:
-http://localhost:8000
+http://localhost
 
 Panel de administración:
-http://localhost:8000/admin
+http://localhost/admin
 
 ---
 

@@ -75,6 +75,7 @@ docker-compose exec web python manage.py createsuperuser
 ### 1️⃣ Configurar `.env` con variables de producción
 
 DEBUG=False
+
 ALLOWED_HOSTS=flores.inmerso.io,www.flores.inmerso.io
 
 ## 2️⃣ Construir y levantar con Nginx

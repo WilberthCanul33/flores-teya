@@ -42,58 +42,49 @@ cp .env.example .env
 
 Luego editar el archivo `.env` con tus credenciales necesarias.
 
----
-
-## 3️⃣ Construir y levantar los contenedores (esto solo para trabajar de manera local)
-
-docker-compose up -d --build
-
----
-
-## 4️⃣ Ejecutar migraciones de la base de datos
-
-docker-compose exec web python manage.py migrate
-
----
-
-## 5️⃣ Cargar productos iniciales (opcional)
-
-docker-compose exec web python scripts/load_products.py
-
----
-
-## 6️⃣ Crear un superusuario para acceder al panel de administración
-
-docker-compose exec web python manage.py createsuperuser
-
----
 
 ## 🚀 Despliegue en producción (con Gunicorn + Nginx)
 
 > ⚠️ **Solo para servidor real, NO para desarrollo local**
 
-### 1️⃣ Configurar `.env` con variables de producción
+### Configurar `.env` con variables de producción
 
 DEBUG=False
 
 ALLOWED_HOSTS=flores.inmerso.io,www.flores.inmerso.io
 
-## 2️⃣ Construir y levantar con Nginx
+## Construir y levantar con Nginx
 
 docker-compose -f docker-compose.prod.yml build
 
 docker-compose -f docker-compose.prod.yml up -d
 
-## 3️⃣ Verificar que todo funciona
+## Migrar base de datos
+
+docker-compose -f docker-compose.prod.yml exec web python manage.py migrate
+
+## Cargar productos iniciales (opcional)
+
+docker-compose -f docker-compose.prod.yml exec web python scripts/load_products.py
+
+## Verificar que todo funciona
 
 docker-compose -f docker-compose.prod.yml ps
 
 docker-compose -f docker-compose.prod.yml logs -f web
 
-## 4️⃣ Crear superusuario en producción
+## Crear superusuario en producción
 
 docker-compose -f docker-compose.prod.yml exec web python manage.py createsuperuser
 
+## Ver estado de los contenedores
+
+docker-compose -f docker-compose.prod.yml ps
+
+
+## Ver logs
+
+docker-compose -f docker-compose.prod.yml logs -f web
 
 
 

@@ -59,9 +59,11 @@ ALLOWED_HOSTS=flores.inmerso.io,www.flores.inmerso.io
 
 ## Construir y levantar con Nginx
 
+```bash
 docker-compose -f docker-compose.prod.yml build
 
 docker-compose -f docker-compose.prod.yml up -d
+```
 
 ## Migrar base de datos
 

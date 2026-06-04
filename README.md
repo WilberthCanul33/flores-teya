@@ -44,7 +44,7 @@ Luego editar el archivo `.env` con tus credenciales necesarias.
 
 ---
 
-## 3️⃣ Construir y levantar los contenedores
+## 3️⃣ Construir y levantar los contenedores (esto solo para trabajar de manera local)
 
 docker-compose up -d --build
 
@@ -67,6 +67,34 @@ docker-compose exec web python scripts/load_products.py
 docker-compose exec web python manage.py createsuperuser
 
 ---
+
+## 🚀 Despliegue en producción (con Gunicorn + Nginx)
+
+> ⚠️ **Solo para servidor real, NO para desarrollo local**
+
+### 1️⃣ Configurar `.env` con variables de producción
+
+DEBUG=False
+ALLOWED_HOSTS=flores.inmerso.io,www.flores.inmerso.io
+
+## 2️⃣ Construir y levantar con Nginx
+
+docker-compose -f docker-compose.prod.yml build
+docker-compose -f docker-compose.prod.yml up -d
+
+## 3️⃣ Verificar que todo funciona
+
+docker-compose -f docker-compose.prod.yml ps
+docker-compose -f docker-compose.prod.yml logs -f web
+
+## 4️⃣ Crear superusuario en producción
+
+docker-compose -f docker-compose.prod.yml exec web python manage.py createsuperuser
+
+
+
+
+
 
 # 🌐 Acceso al sistema
 

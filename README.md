@@ -49,6 +49,8 @@ Luego editar el archivo `.env` con tus credenciales necesarias.
 
 ### Configurar `.env` con variables de producción
 
+```env
+
 DEBUG=False
 
 ALLOWED_HOSTS=flores.inmerso.io,www.flores.inmerso.io

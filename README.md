@@ -81,11 +81,13 @@ ALLOWED_HOSTS=flores.inmerso.io,www.flores.inmerso.io
 ## 2️⃣ Construir y levantar con Nginx
 
 docker-compose -f docker-compose.prod.yml build
+
 docker-compose -f docker-compose.prod.yml up -d
 
 ## 3️⃣ Verificar que todo funciona
 
 docker-compose -f docker-compose.prod.yml ps
+
 docker-compose -f docker-compose.prod.yml logs -f web
 
 ## 4️⃣ Crear superusuario en producción

@@ -43,13 +43,13 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # ← Agrega esto
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # ← Agrega esto
 ]
 
 ROOT_URLCONF = 'organic_veggies.urls'
@@ -202,5 +202,10 @@ else:
 DEFAULT_FROM_EMAIL = 'Organic Veggies <noreply@organicveggies.com>'
 SITE_URL = config('SITE_URL', default='http://localhost:8000')
 
-# Whitenoise para archivos estáticos en producción
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# Whitenoise configuration
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+WHITENOISE_INDEX_FILE = True
+WHITENOISE_ALLOW_ALL_ORIGINS = True
+WHITENOISE_AUTOREFRESH = False
+WHITENOISE_USE_FINDERS = False
+WHITENOISE_MANIFEST_STRICT = False

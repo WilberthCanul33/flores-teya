@@ -76,31 +76,8 @@ WSGI_APPLICATION = 'organic_veggies.wsgi.application'
 # Detectar si estamos en Docker - VERSIÓN MEJORADA
 def is_running_in_docker():
     """Detecta si estamos dentro de un contenedor Docker"""
-    # Método 1: Verificar archivo .dockerenv
-    if os.path.exists('/.dockerenv'):
-        return True
-    
-    # Método 2: Verificar en cgroup
-    try:
-        with open('/proc/self/cgroup', 'r') as f:
-            if any('docker' in line for line in f):
-                return True
-    except:
-        pass
-    
-    # Método 3: Verificar variable de entorno (la más confiable)
-    if os.environ.get('DOCKER_CONTAINER') == 'true':
-        return True
-    
-    # Método 4: Verificar nombre de host
-    import socket
-    try:
-        socket.gethostbyname('db')  # Intenta resolver 'db'
-        return True
-    except socket.gaierror:
-        pass
-    
-    return False
+    # La variable DOCKER_CONTAINER=true se pasa desde docker-compose
+    return os.environ.get('DOCKER_CONTAINER') == 'true'
 
 # Configuración de base de datos según el entorno
 if is_running_in_docker():

@@ -55,6 +55,8 @@ DEBUG=False
 
 ALLOWED_HOSTS=flores.inmerso.io,www.flores.inmerso.io
 
+```
+
 ## Construir y levantar con Nginx
 
 docker-compose -f docker-compose.prod.yml build

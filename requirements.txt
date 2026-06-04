@@ -7,7 +7,6 @@ crispy-bootstrap5==2024.2
 cryptography==46.0.5
 deep-translator==1.11.4
 Django==5.0.2
-django-allauth==65.14.3
 django-crispy-forms==2.1
 idna==3.11
 paypalrestsdk==1.13.3

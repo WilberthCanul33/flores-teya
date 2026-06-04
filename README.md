@@ -221,12 +221,10 @@ EMAIL_HOST_USER=tu-email-real@gmail.com
 EMAIL_HOST_PASSWORD=tu-contraseña-de-aplicacion
 SITE_URL=https://tu-dominio.com
 
-# 🔴 CRÍTICO: Debe ser tu dominio real, NO localhost.
-SITE_URL=https://tu-dominio.com
-
-# En `settings.py`, `SITE_URL` se configura así:
-
-SITE_URL = config('SITE_URL', default='http://localhost:8000')
+# 🔴 CRÍTICO: Configurar según el entorno
+SITE_URL=http://localhost:8000   # Desarrollo local
+# SITE_URL=http://localhost      # Producción (localhost)
+# SITE_URL=https://tu-dominio.com # Producción (dominio real)
 
 
 ```

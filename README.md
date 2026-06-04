@@ -176,3 +176,9 @@ PAYPAL_CANCEL_URL=https://tu-dominio.com/orders/payment-cancelled/```
 # Cambiar en producción
 DEBUG=False
 ALLOWED_HOSTS=['tu-dominio.com']
+
+### 🔒 ALLOWED_HOSTS
+
+```env
+# Dominios permitidos (separados por comas, SIN espacios)
+ALLOWED_HOSTS=flores.inmerso.io,www.flores.inmerso.io
